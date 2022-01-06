@@ -28,6 +28,7 @@ type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
+	VersionLastChange string `json:"versionLastChange"`
 	PlainTextProfileReferencerecord struct {
 		Items []PlainTextProfileReference `json:"items,omitempty"`
 	} `json:"plainTextProfileReference"`
