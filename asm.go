@@ -21,6 +21,11 @@ type WAFpolicies struct {
 	WAFpolicies []WAFpolicy `json:"items"`
 }
 
+type PlainTextProfileReference struct {
+	Link            string `json:"link"`
+	IsSubCollection bool   `json:"isSubCollection"`
+} `json:"plainTextProfileReference"`
+}
 type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
@@ -286,6 +291,7 @@ type WAFpolicy struct {
 		} `json:"policyBuilderCentralConfigurationReference"`
 	} `json:"items"`
 }
+
 
 const (
 	uriWAF            = "asm"
