@@ -37,6 +37,7 @@ type WAFpolicy struct {
 const (
 	uriWAF            = "asm"
   uriWAFPolicies    = "policies"
+	uriParameters     = "parameters"
 )
 
 //  returns a list of WAF .
@@ -50,6 +51,15 @@ func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	return &wAFpolicies, nil
 }
 
+func (b *BigIP) WAFpoliciesparam() (*WAFpoliciesparam, error) {
+	var wAFpoliciesparam WAFpoliciesparam
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, Substr, uriParameters)
+	if err != nil {
+		return nil, err
+	}
+
+	return &wAFpolicies, nil
+}
 // WAF adds a new WAF profile on the BIG-IP system.
 func (b *BigIP) AddWAFpolicy(config *WAFpolicies) error {
 	return b.post(config, uriWAF, uriWAFPolicies)
