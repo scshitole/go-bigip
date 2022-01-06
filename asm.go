@@ -22,12 +22,12 @@ type WAFpolicies struct {
 }
 
 
-type WAFpolicy struct {
+/*type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
   Items  []string   `json:"items,omitempty"`
-}
+}*/
 
 
 const (
