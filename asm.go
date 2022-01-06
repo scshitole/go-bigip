@@ -39,7 +39,7 @@ const (
 //  returns a list of WAF .
 func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	var wAFpolicies WAFpolicies
-	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies)
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolic)
 	if err != nil {
 		return nil, err
 	}
