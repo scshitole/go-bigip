@@ -21,7 +21,7 @@ type WAFpolicies struct {
 	WAFpolicies []WAFpolicy `json:"items"`
 }
 
-type WApolicy struct {
+type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
@@ -292,10 +292,10 @@ const (
   uriWAFPolicies    = "policies"
 )
 
-//  returns a list of server-ssl profiles.
+//  returns a list of WAF .
 func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	var wAFpolicies WAFpolicies
-	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name)
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies)
 	if err != nil {
 		return nil, err
 	}
@@ -303,7 +303,7 @@ func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	return &wAFpolicies, nil
 }
 
-// AddServerWAFProfile adds a new WAF profile on the BIG-IP system.
+// WAF adds a new WAF profile on the BIG-IP system.
 func (b *BigIP) AddWAFpolicy(config *WAFpolicies) error {
 	return b.post(config, uriWAF, uriWAFPolicies)
 }
