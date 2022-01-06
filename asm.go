@@ -295,7 +295,7 @@ const (
 //  returns a list of server-ssl profiles.
 func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	var wAFpolicies WAFpolicies
-	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies)
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name)
 	if err != nil {
 		return nil, err
 	}
