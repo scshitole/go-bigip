@@ -21,14 +21,12 @@ type WAFpolicies struct {
 	WAFpolicies []WAFpolicy `json:"items"`
 }
 
-type PlainTextProfileReferencerecords  struct {
-	 items []PlainTextProfileReferencerecord `json:"items,omitempty"`
-}
+
 type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
-  Items  []string   `json:"items"`	 
+  Items  []string   `json:"items,omitempty"`
 }
 
 
