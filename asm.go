@@ -13,7 +13,6 @@ package bigip
 import (
 /*	"regexp"
 	"strings"*/
-"time"
 )
 
 // WAF Policies  on the BIG-IP system.
@@ -22,13 +21,18 @@ type WAFpolicies struct {
 }
 
 
-/*type WAFpolicy struct {
+type WAFpolicy struct {
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
   Items  []string   `json:"items,omitempty"`
-}*/
-
+	Name string `json:"name"`
+		PolicyID string `json:"id"`
+	PlainTextProfileReference  struct {
+		Link string `json:"link"`
+		IsSubCollection bool `json:"isSubCollection"`
+	}
+}
 
 const (
 	uriWAF            = "asm"
@@ -39,7 +43,7 @@ const (
 //  returns a list of WAF .
 func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 	var wAFpolicies WAFpolicies
-	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolic)
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies)
 	if err != nil {
 		return nil, err
 	}
@@ -50,4 +54,14 @@ func (b *BigIP) WAFpolicies() (*WAFpolicies, error) {
 // WAF adds a new WAF profile on the BIG-IP system.
 func (b *BigIP) AddWAFpolicy(config *WAFpolicies) error {
 	return b.post(config, uriWAF, uriWAFPolicies)
+}
+
+func (b *BigIP) ReadWAFpolicies(name string) (*WAFpolicies, error) {
+	var wAFpolicies WAFpolicies
+  err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name)
+  if err != nil {
+ 	 return nil, err
+  }
+
+ return &wAFpolicies, nil
 }
