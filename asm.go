@@ -30,8 +30,9 @@ type WAFpolicy struct {
 	TotalItems int    `json:"totalItems"`
 	VersionLastChange string `json:"versionLastChange"`
 	PlainTextProfileReferencerecord struct {
-		Items []PlainTextProfileReference `json:"items,omitempty"`
-	} `json:"plainTextProfileReference"`
+		Link string `json:"link"`
+		IsSubCollection bool `json:"isSubCollection"`
+	}
 }
 
 
