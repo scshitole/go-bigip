@@ -22,7 +22,6 @@ type WAFpolicies struct {
 }
 
 type WAFpolicy struct {
-	Name string `json:"name,omitempty"`
 	Kind       string `json:"kind"`
 	SelfLink   string `json:"selfLink"`
 	TotalItems int    `json:"totalItems"`
