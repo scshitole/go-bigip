@@ -20,24 +20,28 @@ type WAFpolicies struct {
 	WAFpolicies []WAFpolicy `json:"items"`
 }
 
-
 type WAFpolicy struct {
-	Kind       string `json:"kind"`
-	SelfLink   string `json:"selfLink"`
-	TotalItems int    `json:"totalItems"`
-  Items  []string   `json:"items,omitempty"`
-	Name string `json:"name"`
-		PolicyID string `json:"id"`
-	PlainTextProfileReference  struct {
-		Link string `json:"link"`
-		IsSubCollection bool `json:"isSubCollection"`
+	Kind                      string   `json:"kind"`
+	SelfLink                  string   `json:"selfLink"`
+	TotalItems                int      `json:"totalItems"`
+	Items                     []string `json:"items,omitempty"`
+	Name                      string   `json:"name"`
+	PolicyID                  string   `json:"id"`
+	PlainTextProfileReference struct {
+		Link            string `json:"link"`
+		IsSubCollection bool   `json:"isSubCollection"`
+	}
+	ParameterReference struct {
+		Link            string `json:"link"`
+		IsSubCollection bool   `json:"isSubCollection"`
 	}
 }
 
 const (
-	uriWAF            = "asm"
-  uriWAFPolicies    = "policies"
-	uriParameters     = "parameters"
+	uriWAF         = "asm"
+	uriWAFPolicies = "policies"
+	uriParameters  = "parameters"
+	uriFiletype  = "filetypes"
 )
 
 //  returns a list of WAF .
@@ -56,12 +60,22 @@ func (b *BigIP) AddWAFpolicy(config *WAFpolicies) error {
 	return b.post(config, uriWAF, uriWAFPolicies)
 }
 
-func (b *BigIP) ReadWAFpolicies(name string) (*WAFpolicies, error) {
+func (b *BigIP) Readpolicyparameters(name string) (*WAFpolicies, error) {
 	var wAFpolicies WAFpolicies
-  err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name)
-  if err != nil {
- 	 return nil, err
-  }
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name, uriParameters)
+	if err != nil {
+		return nil, err
+	}
 
- return &wAFpolicies, nil
+	return &wAFpolicies, nil
+}
+
+func (b *BigIP) Readfiletypes(name string) (*WAFpolicies, error) {
+	var wAFpolicies WAFpolicies
+	err, _ := b.getForEntity(&wAFpolicies, uriWAF, uriWAFPolicies, name, uriFiletype)
+	if err != nil {
+		return nil, err
+	}
+
+	return &wAFpolicies, nil
 }
