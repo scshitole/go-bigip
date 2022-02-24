@@ -26,7 +26,7 @@ func main() {
  	fmt.Println("Attempting to Connect...\n")
 	*/fmt.Println("Attempting to connect...")
 	// Establish our session to the BIG-IP
-f5 := bigip.NewSession("10.192.74.74", "443", "admin", "shitole408", nil)
+f5 := bigip.NewSession("ip_address", "443", "admin", "password", nil)
 // Iterate over all the virtual servers, and display their names.
 	vservers, err := f5.VirtualServers()
 	if err != nil {
